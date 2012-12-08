@@ -1,0 +1,69 @@
+<head>
+  <title>I challenge you...</title>
+</head>
+
+<body>
+
+  <div id="outer">
+     <div style="float: right">
+       {{loginButtons align="right"}}
+     </div>
+    {{> challengeboard}}
+  </div>
+</body>
+
+<template name="challengeboard">
+  {{> sortBy }}
+  <div class="challengeboard">
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    <div class="name">{{selected_name}}</div>
+    <input type="button" class="inc" value="Give 5 points" />
+  </div>
+  {{/if}}
+
+  {{#unless selected_name}}
+  <div class="none">Click a player to select</div>
+  {{/unless}}
+  {{> new_player}}
+  <div>
+  <input type="button" class="random" value="Random Number" />
+  </div>
+  
+</template>
+
+<template name="sortBy">
+	<div>
+    {{#if sortByName}}
+ 	<input type="button" class="score" value="Sort by score" />
+    {{else}}
+  	<input type="button" class="name" value="Sort by name" />
+  	{{/if}}
+  	</div>
+</template>
+
+<template name="player">
+  <div class="player {{selected}}">
+    <input type="button" value="X" class="delete" /> <!-- here it is -->
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
+<template name="new_player">
+  {{#if error}}
+    <span id="error" style="color: red;">
+      {{error}} 
+    </span>
+  {{/if}}
+  <div>
+    <input id="new_player_name" type="text" />
+    <input type="button" class="add" value="Add Player" />
+  </div>
+</template>
+
