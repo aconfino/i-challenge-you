@@ -123,6 +123,8 @@ if (Meteor.isServer) {
         Players.insert({name: names[i], score: Math.floor(Math.random()*10)*5});
     }
 
+    Challenges.remove({});
+
     if (Challenges.find().count() === 0){
         Challenges.insert({name: 'Ate 3 healthy meals', points: 5});
         Challenges.insert({name: 'Aerobic workout - 20+ min', points: 3});

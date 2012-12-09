@@ -8,17 +8,19 @@
      <div style="float: right">
        {{loginButtons align="right"}}
      </div>
-    {{> challengeboard}}
+    {{> playerboard}}
   </div>
 </body>
 
-<template name="challengeboard">
+<template name="playerboard">
   {{> sortBy }}
-  <div class="challengeboard">
+  <div class="playerboard">
     {{#each players}}
       {{> player}}
     {{/each}}
   </div>
+
+  {{> challengeboard}}
 
   {{#if selected_name}}
   <div class="details">
@@ -64,6 +66,22 @@
   <div>
     <input id="new_player_name" type="text" />
     <input type="button" class="add" value="Add Player" />
+  </div>
+</template>
+
+<template name="challengeboard">
+  <div class="challengeboard">
+	<h3>Challenges</h3>
+    	{{#each challenges}}
+      	    {{>challenge}}
+    	{{/each}}
+  </div>
+</template>
+
+<template name="challenge">
+  <div class="challenge">
+    <span class="name">{{name}}</span>
+    <input type="button" value="add {{points}} points" class="add" />
   </div>
 </template>
 

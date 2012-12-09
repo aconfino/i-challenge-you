@@ -40,6 +40,10 @@ body {
     color: black;
 }
 
+.challenge {
+  //  float: left;
+}
+
 .challenge .name {
     display: inline-block;
     width: 300px;
