@@ -18,20 +18,11 @@
       {{> player}}
     {{/each}}
   </div>
-
   {{> challengeboard}}
-
-  {{#if selected_name}}
-  <div class="details">
-    <div class="name">{{selected_name}}</div>
-    <input type="button" class="inc" value="Give 5 points" />
-  </div>
-  {{/if}}
-
+  {{> new_player}}
   {{#unless selected_name}}
   <div class="none">Click a player to select</div>
   {{/unless}}
-  {{> new_player}}
 </template>
 
 <template name="player">
@@ -43,6 +34,7 @@
 </template>
 
 <template name="new_player">
+  <h3>Add a player</h3>
   {{#if error}}
     <span id="error" style="color: red;">
       {{error}} 
@@ -50,7 +42,7 @@
   {{/if}}
   <div>
     <input id="new_player_name" type="text" />
-    <input type="button" class="add" value="Add Player" />
+    <input type="button" class="addPlayer" value="Add Player" />
   </div>
 </template>
 
@@ -66,7 +58,6 @@
 <template name="challenge">
   <div class="challenge">
     <span class="name">{{name}}</span>
-    <input type="button" value="add {{points}} points" class="add" />
+    <button type="submit" class="addPoints" value="{{points}}">add {{points}} points</button>
   </div>
 </template>
-

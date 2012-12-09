@@ -6,12 +6,7 @@ Challenges = new Meteor.Collection("challenges");
 
 if (Meteor.isClient) {
   Template.playerboard.players = function () {
-    if (Session.get('sortByName') === 'true'){
-      return Players.find({}, {sort: {name: 1}});
-    }
-    else {
       return Players.find({}, {sort: {score: -1}});     
-    }
   };
 
   Template.playerboard.selected_name = function () {
@@ -21,16 +16,6 @@ if (Meteor.isClient) {
 
   Template.player.selected = function () {
     return Session.equals("selected_player", this._id) ? "selected" : '';
-  };
-
-  Template.playerboard.events({
-    'click input.inc': function () {
-      Players.update(Session.get("selected_player"), {$inc: {score: 5}});
-    }
-  });
-
-  Template.challengeboard.challenges = function () {
-      return Challenges.find({}, {sort: {points: -1}});
   };
 
   Template.player.events({
@@ -48,11 +33,23 @@ if (Meteor.isClient) {
   };
 
   Template.new_player.events = ({
-     'click .add': function(){
+     'click .addPlayer': function(){
      var new_player_name = document.getElementById("new_player_name").value.trim();
      if (PlayerValidator.valid_name(new_player_name)) {
       	Players.insert({name: new_player_name, score: 0});
      } 
+   }
+  });
+
+
+  Template.challengeboard.challenges = function () {
+      return Challenges.find({}, {sort: {points: -1}});
+  };
+
+  Template.challenge.events = ({
+     'click .addPoints': function (event, template) {
+    var points = parseInt(template.find(".addPoints").value);
+    Players.update(Session.get("selected_player"), {$inc: {score: points}});
    }
   });
 
