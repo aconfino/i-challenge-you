@@ -47,25 +47,6 @@ if (Meteor.isClient) {
       Players.remove(this._id);
     }
   });
-  
-  Template.sortBy.sortByName = function () {
-    if (Session.get('sortByName') === 'true'){
-      return true;
-    }
-    else {
-	  return false;     
-	}
-  };
-
-  Template.sortBy.events = ({
-     'click .score': function(){
-     Session.set('sortByName', 'false');
-     },
-     
-     'click .name': function(){
-     Session.set('sortByName', 'true');
-     }
-  });
 
   // used for validation
   Template.new_player.error = function () {
@@ -122,8 +103,6 @@ if (Meteor.isServer) {
       for (var i = 0; i < names.length; i++)
         Players.insert({name: names[i], score: Math.floor(Math.random()*10)*5});
     }
-
-    Challenges.remove({});
 
     if (Challenges.find().count() === 0){
         Challenges.insert({name: 'Ate 3 healthy meals', points: 5});

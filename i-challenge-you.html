@@ -13,7 +13,6 @@
 </body>
 
 <template name="playerboard">
-  {{> sortBy }}
   <div class="playerboard">
     {{#each players}}
       {{> player}}
@@ -33,20 +32,6 @@
   <div class="none">Click a player to select</div>
   {{/unless}}
   {{> new_player}}
-  <div>
-  <input type="button" class="random" value="Random Number" />
-  </div>
-  
-</template>
-
-<template name="sortBy">
-	<div>
-    {{#if sortByName}}
- 	<input type="button" class="score" value="Sort by score" />
-    {{else}}
-  	<input type="button" class="name" value="Sort by name" />
-  	{{/if}}
-  	</div>
 </template>
 
 <template name="player">

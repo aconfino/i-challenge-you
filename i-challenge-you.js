@@ -26,12 +26,6 @@ if (Meteor.isClient) {
   Template.playerboard.events({
     'click input.inc': function () {
       Players.update(Session.get("selected_player"), {$inc: {score: 5}});
-    },
-     'click .random': function () {
-	var random_score = Math.floor(Math.random()*10)*5;
-        Players.find().forEach(function (player) {   
-             Players.update({_id: player._id}, {$set: {score: random_score}});
-       });
     }
   });
 
@@ -46,25 +40,6 @@ if (Meteor.isClient) {
     'click .delete': function(){
       Players.remove(this._id);
     }
-  });
-  
-  Template.sortBy.sortByName = function () {
-    if (Session.get('sortByName') === 'true'){
-      return true;
-    }
-    else {
-	  return false;     
-	}
-  };
-
-  Template.sortBy.events = ({
-     'click .score': function(){
-     Session.set('sortByName', 'false');
-     },
-     
-     'click .name': function(){
-     Session.set('sortByName', 'true');
-     }
   });
 
   // used for validation
